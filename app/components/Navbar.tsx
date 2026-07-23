@@ -3,9 +3,9 @@ import React from 'react'
 
 function Navbar() {
   return (
-    <nav className="flex gap-4 p-4">
-        <Link href="/">Home Page</Link>
-        <Link href="/notion">Test Notion</Link>
+    <nav className="flex gap-4 p-4 font-bold">
+        <Link href="/">หน้าหลัก</Link>
+        <Link href="/notion">ทดสอบ</Link>
     </nav>
   )
 }

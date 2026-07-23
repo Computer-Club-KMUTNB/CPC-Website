@@ -53,15 +53,29 @@ export default async function Notion() {
 
   return (
     <main style={{ padding: "2rem" }}>
-      <h1>Infomation</h1>
-      {members.length === 0 && <p>No members found.</p>}
-      <ul>
+      <h1 className="mb-6 text-2xl font-semibold">ข้อมูลของขาวชมรม</h1>
+      {members.length === 0 && <p className="text-gray-600">ไม่พบข้อมูลของขาวชมรม</p>}
+
+      <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
+        <div className="grid grid-cols-[120px_1fr_160px_100px] border-b border-gray-200 bg-gray-50 px-4 py-3 text-sm font-semibold text-gray-700">
+          <div>รหัส</div>
+          <div>ชื่อ</div>
+          <div>สาขา</div>
+          <div>ปี</div>
+        </div>
+
         {members.map((member) => (
-          <li className="flex border-2" key={`${member.id}-${member.member_name}`}>
-            {`${member.id}: ${member.member_name}, ${member.major}, ${member.year}`}
-          </li>
+          <div
+            key={`${member.id}-${member.member_name}`}
+            className="grid grid-cols-[120px_1fr_160px_100px] border-b border-gray-100 px-4 py-3 text-sm text-gray-700 last:border-b-0"
+          >
+            <div>{member.id}</div>
+            <div>{member.member_name}</div>
+            <div>{member.major}</div>
+            <div>{member.year}</div>
+          </div>
         ))}
-      </ul>
+      </div>
     </main>
   );
 }
