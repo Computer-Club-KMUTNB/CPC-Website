@@ -4,13 +4,13 @@ export default async function Notion() {
   let posts = await getPages(process.env.NOTION_DATABASE_ID!
   );
   posts = posts.sort((a, b) => {
-    const idA = a.properties?.ID?.unique_id?.number 
-    const idB = b.properties?.ID?.unique_id?.number
+    const idA = a.properties.ID?.unique_id?.number 
+    const idB = b.properties.ID?.unique_id?.number
     return idA - idB}
   )
   return (
     <main style={{ padding: "2rem" }}>
-      <h1>Infomation</h1>
+      <h1 className="border-b">Infomation</h1>
       {posts.length === 0 && <p>No posts found.</p>}
       <ul>
         {posts.map((post: any) => {
@@ -28,7 +28,7 @@ export default async function Notion() {
           }  
           const year = yearProperty?.type === "number" ? yearProperty.number : "";
           const major = majorProperty?.type === "select" ? majorProperty.select?.name : "";
-          return <li className="flex border-2" key={post.id}>{`${id}: ${name}, ${major}, ${year}`}</li>;
+          return <li className="font-bold flex border-2 p-2" key={post.id}>{`${id}: ${name}, ${major}, ${year}`}</li>;
         })}
       </ul>
     </main>
