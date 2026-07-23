@@ -4,10 +4,12 @@ export default async function Notion() {
   let posts = await getPages(process.env.NOTION_DATABASE_ID!
   );
   posts = posts.sort((a, b) => {
-    const idA = a.properties?.ID?.unique_id?.number 
-    const idB = b.properties?.ID?.unique_id?.number
-    return idA - idB}
-  )
+    const aProps = "properties" in a ? (a.properties as any) : null;
+    const bProps = "properties" in b ? (b.properties as any) : null;
+    const idA = aProps?.ID?.unique_id?.number ?? 0;
+    const idB = bProps?.ID?.unique_id?.number ?? 0;
+    return idA - idB;
+  })
   return (
     <main style={{ padding: "2rem" }}>
       <h1>Infomation</h1>
