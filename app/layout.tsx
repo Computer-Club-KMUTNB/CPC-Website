@@ -25,7 +25,9 @@ export default function RootLayout({
       className={cpcFont.variable}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar/>{children}</body>
+          <Navbar />
+          {children}
+      </body>
     </html>
   );
 }
