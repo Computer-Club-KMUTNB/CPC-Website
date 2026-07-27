@@ -33,7 +33,7 @@ function Navbar() {
           className="rounded-full border border-gray-300 bg-white px-3 py-1 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 dark:hover:bg-gray-800"
           aria-label="Toggle color theme"
         >
-          {mounted ? (isDark ? '☀️ Light' : '🌙 Dark') : '…'}
+          {mounted ? (isDark ? '☀️' : '🌙') : '…'}
         </button>
       </div>
     </nav>
