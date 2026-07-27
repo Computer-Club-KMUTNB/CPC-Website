@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import Providers from "./components/Providers";
 
 const cpcFont = localFont({
   src: "/fonts/2005_iannnnnAMD.ttf",
@@ -25,7 +26,11 @@ export default function RootLayout({
       className={cpcFont.variable}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar/>{children}</body>
+        <Providers>
+          <Navbar />
+          {children}
+          </Providers>
+      </body>
     </html>
   );
 }
