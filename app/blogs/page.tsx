@@ -1,4 +1,5 @@
 import { getPages } from "@/lib/notion";
+import { formatTextProperty } from "@/lib/utils";
 
 type Blog = {
   title: string;
@@ -8,61 +9,17 @@ type Blog = {
   type: string;
 };
 
-function formatTitle(property: any): string {
-  return property?.type === "title" ? property.title?.[0]?.plain_text || "Untitled" : "Untitled";
-}
-
-function formatUniqueId(property: any): string {
-  if (property?.type === "unique_id") {
-    const prefix = property.unique_id?.prefix ? `${property.unique_id.prefix}-` : "";
-    return `${prefix}${property.unique_id?.number ?? ""}`;
-  }
-
-  return "";
-}
-
-function formatSelect(property: any): string {
-  return property?.type === "select" ? property.select?.name ?? "" : "";
-}
-
-function formatPeople(property: any): string {
-  if (property?.type !== "people" || !Array.isArray(property.people)) {
-    return "";
-  }
-
-  return property.people
-    .map((person: any) => person?.name || person?.person?.email || "")
-    .filter(Boolean)
-    .join(", ");
-}
-
-function formatDate(property: any): string {
-  if (!property?.date?.start) {
-    return "";
-  }
-
-  const date = new Date(property.date.start);
-  if (Number.isNaN(date.getTime())) {
-    return property.date.start;
-  }
-
-  return new Intl.DateTimeFormat(undefined, {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  }).format(date);
-}
 
 async function getBlogs(): Promise<Blog[]> {
   const blogs = await getPages(process.env.NOTION_BLOGS_ID!);
   return blogs.map((post: any) => {
     const properties = post.properties ?? {};
     return {
-      title: formatTitle(properties.Title),
-      id: formatUniqueId(properties.ID),
-      author: formatPeople(properties.Author),
-      type: formatSelect(properties.Type),
-      created_at: formatDate(properties["Created at"] ?? properties["Created_at"] ?? properties["created_at"]),
+      title: formatTextProperty(properties.Title),
+      id: formatTextProperty(properties["Blog ID"]),
+      author: formatTextProperty(properties.Author),
+      type: formatTextProperty(properties["Blog Type"]),
+      created_at: formatTextProperty(properties["Created at"] ?? properties["Created_at"] ?? properties["created_at"]),
     };
   });
 }
