@@ -22,7 +22,7 @@ function Navbar() {
         <Image src={logoSrc} alt="โลโก้ชมรมคอมพิวเตอร์" width={20} height={20} />
       </Link>
 
-      <div className="font-cpc ml-auto flex items-center gap-2 text-3xl">
+      <div className="font-cpc ml-auto flex items-center gap-4 text-3xl">
         <Link href="/">หน้าหลัก</Link>
         <Link href="/notion">ทดสอบ</Link>
         <Link href="/blogs">Blog ชาวชมรม</Link>
